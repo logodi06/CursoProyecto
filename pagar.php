@@ -74,7 +74,7 @@ $articulo->setName($producto)
          ->setPrice($precio);
 
 $i = 0;
-foreach($numero_boletos as $key => value{
+foreach($numero_boletos as $key => $value{
     if((int) $value['cantidad']>0){
         ${"articulos$i"} = new Item();
         ${"articulos$i"}->setName('Pase:' . $key)
@@ -86,7 +86,7 @@ foreach($numero_boletos as $key => value{
 }
 
 //echo $articulo->getName();
-//echo $articulo->getPrice();
+echo $articulo->getPrice();
 
 /*
 $listaArticulos = new ItemList();
