@@ -45,7 +45,7 @@ if(isset($_POST['submit'])):
         echo "</pre>";
 
             exit; */
-    endif;
+   
         try{
             require_once('includes/funciones/bd_conexion.php');
             $stmt = $conn -> prepare ("INSERT INTO registrados (nombre_registrado,apellido_registrado,email_registrado,fecha_registro,pases_articulos,talleres_registrados,regalo,total_pagado) VALUES (?,?,?,?,?,?,?,?)");
@@ -53,15 +53,14 @@ if(isset($_POST['submit'])):
             $stmt->execute();
             $stmt->close();
             $conn->close();
-            header('Location: validar_registro.php?exitoso=1');
+            //header('Location: validar_registro.php?exitoso=1');
         }catch(Exception $e){
             echo $e->getMessage();
         }
- 
+endif;
 
 
 
- 
 $compra = new Payer();
 $compra->setPaymentMethod('paypal');
 
@@ -74,19 +73,19 @@ $articulo->setName($producto)
          ->setPrice($precio);
 
 $i = 0;
-foreach($numero_boletos as $key => $value{
+foreach($numero_boletos as $key => $value){
     if((int) $value['cantidad']>0){
-        ${"articulos$i"} = new Item();
-        ${"articulos$i"}->setName('Pase:' . $key)
+        ${"articulo$i"} = new Item();
+        ${"articulo$i"}->setName('Pase: ' . $key)
         ->setCurrency('MXN')
-        ->setQuantity(1)
-        ->setPrice($precio);
-        i++;
+        ->setQuantity((int) $value['cantidad'])
+        ->setPrice((int) $value['precio']);
+        $i++;
     }
 }
 
-//echo $articulo->getName();
-echo $articulo->getPrice();
+echo $articulo0->getQuantity();
+//echo $articulo->getPrice();
 
 /*
 $listaArticulos = new ItemList();
